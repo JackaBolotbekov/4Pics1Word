@@ -1,0 +1,258 @@
+package com.example.a4pics1word;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class GameActivity extends AppCompatActivity {
+
+    private Button word1;
+    private Button word2;
+    private Button word3;
+    private Button word4;
+    private String word1_text;
+    private String word2_text;
+    private String word3_text;
+    private String word4_text;
+    private Button l1;
+    private Button l2;
+    private Button l3;
+    private Button l4;
+    private Button l5;
+    private Button w1;
+    private Button w2;
+    private Button w3;
+    private Button w4;
+    private Button w5;
+    private Button clear;
+    private String l1_text;
+    private String l2_text;
+    private String l3_text;
+    private String l4_text;
+    private String l5_text;
+    private String w1_text;
+    private String w2_text;
+    private String w3_text;
+    private String w4_text;
+    private String w5_text;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+        word1 = (Button) findViewById(R.id.first_letter);
+        word2 = (Button) findViewById(R.id.second_letter);
+        word3 = (Button) findViewById(R.id.third_letter);
+        word4 = (Button) findViewById(R.id.fourth_letter);
+        l1 = (Button) findViewById(R.id.l_1);
+        l2 = (Button) findViewById(R.id.l_2);
+        l3 = (Button) findViewById(R.id.l_3);
+        l4 = (Button) findViewById(R.id.l_4);
+        l5 = (Button) findViewById(R.id.l_5);
+        w1 = (Button) findViewById(R.id.w_1);
+        w2 = (Button) findViewById(R.id.w_2);
+        w3 = (Button) findViewById(R.id.w_3);
+        w4 = (Button) findViewById(R.id.w_4);
+        w5 = (Button) findViewById(R.id.w_5);
+        clear = (Button) findViewById(R.id.btn_clear);
+        l1_text = l1.getText().toString();
+        l2_text = l2.getText().toString();
+        l3_text = l3.getText().toString();
+        l4_text = l4.getText().toString();
+        l5_text = l5.getText().toString();
+        w1_text = w1.getText().toString();
+        w2_text = w2.getText().toString();
+        w3_text = w3.getText().toString();
+        w4_text = w4.getText().toString();
+        w5_text = w5.getText().toString();
+        setUpListener();
+        clearListener();
+    }
+
+    private void setUpListener() {
+        l1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                l1_text = l1.getText().toString();
+                if (!l1_text.equals("")) {
+                    examination(l1, l1_text);
+                }
+            }
+        });
+        l2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                l2_text = l2.getText().toString();
+                if (!l2_text.equals("")) {
+                    examination(l2, l2_text);
+                }
+            }
+        });
+
+        l3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                l3_text = l3.getText().toString();
+                if (!l3_text.equals("")) {
+                    examination(l3, l3_text);
+                }
+            }
+        });
+        l4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                l4_text = l4.getText().toString();
+                if (!l4_text.equals("")) {
+                    examination(l4, l4_text);
+                }
+            }
+        });
+        l5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                l5_text = l5.getText().toString();
+                if (!l5_text.equals("")) {
+                    examination(l5, l5_text);
+                }
+            }
+        });
+        w1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                w1_text = w1.getText().toString();
+                if (!w1_text.equals("")) {
+                    examination(w1, w1_text);
+                }
+            }
+        });
+        w2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                w2_text = w2.getText().toString();
+                if (!w2_text.equals("")) {
+                    examination(w2, w2_text);
+                }
+            }
+        });
+        w3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                w3_text = w3.getText().toString();
+                if (!w3_text.equals("")) {
+                    examination(w3, w3_text);
+                }
+            }
+        });
+        w4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                w4_text = w4.getText().toString();
+                if (!w4_text.equals("")) {
+                    examination(w4, w4_text);
+                }
+            }
+        });
+        w5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                w5_text = w5.getText().toString();
+                if (!w5_text.equals("")) {
+                    examination(w5, w5_text);
+                }
+            }
+        });
+    }
+
+    private void examination(Button l, String text) {
+        if (word1.getText() == "") {
+            word1.setText(text);
+            l.setText("");
+        } else if (word1.getText() != "" && word2.getText() == "") {
+            word2.setText(text);
+            l.setText("");
+        } else if (word1.getText() != "" && word2.getText() != "" && word3.getText() == "") {
+            word3.setText(text);
+            l.setText("");
+        } else if (word1.getText() != "" && word2.getText() != "" && word3.getText() != "" && word4.getText() == "") {
+            word4.setText(text);
+            l.setText("");
+            word1_text = word1.getText().toString();
+            word2_text = word2.getText().toString();
+            word3_text = word3.getText().toString();
+            word4_text = word4.getText().toString();
+            String finalWord = word1_text + word2_text + word3_text + word4_text;
+            if (finalWord.equals("вода")) {
+                Toast.makeText(this, "ВЕРНО", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "неправильно", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void clearListener() {
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (word4.getText() != "") {
+                    word4_text = word4.getText().toString();
+                    switchCase(word4_text);
+                    word4.setText("");
+                } else if (word3.getText() != "") {
+                    word3_text = word3.getText().toString();
+                    switchCase(word3_text);
+                    word3.setText("");
+                } else if (word2.getText() != "") {
+                    word2_text = word2.getText().toString();
+                    switchCase(word2_text);
+                    word2.setText("");
+                } else if (word1.getText() != "") {
+                    word1_text = word1.getText().toString();
+                    switchCase(word1_text);
+                    word1.setText("");
+                } else {
+                    Toast.makeText(GameActivity.this, "нечего очищять!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void switchCase(String value) {
+        switch (value) {
+            case "а":
+                l1.setText("а");
+                break;
+            case "б":
+                l2.setText("б");
+                break;
+            case "в":
+                l3.setText("в");
+                break;
+            case "г":
+                l4.setText("г");
+                break;
+            case "д":
+                l5.setText("д");
+                break;
+            case "и":
+                w1.setText("и");
+                break;
+            case "к":
+                w2.setText("к");
+                break;
+            case "о":
+                w3.setText("о");
+                break;
+            case "ж":
+                w4.setText("ж");
+                break;
+            case "е":
+                w5.setText("е");
+                break;
+        }
+    }
+}
