@@ -1,8 +1,12 @@
 package com.example.a4pics1word;
 
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -11,40 +15,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
 
-    private Button word1;
-    private Button word2;
-    private Button word3;
-    private Button word4;
-    private String word1_text;
-    private String word2_text;
-    private String word3_text;
-    private String word4_text;
-    private Button l1;
-    private Button l2;
-    private Button l3;
-    private Button l4;
-    private Button l5;
-    private Button w1;
-    private Button w2;
-    private Button w3;
-    private Button w4;
-    private Button w5;
-    private Button clear;
-    private String l1_text;
-    private String l2_text;
-    private String l3_text;
-    private String l4_text;
-    private String l5_text;
-    private String w1_text;
-    private String w2_text;
-    private String w3_text;
-    private String w4_text;
-    private String w5_text;
+    private Button word1, word2, word3, word4;
+    private String word1_text, word2_text, word3_text, word4_text;
+    private Button l1, l2, l3, l4, l5;
+    private Button w1, w2, w3, w4, w5, clear;
+    private String l1_text, l2_text, l3_text, l4_text, l5_text;
+    private String w1_text, w2_text, w3_text, w4_text, w5_text;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        initialize();
+        setUpListener();
+        clearListener();
+    }
+
+    private void initialize() {
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         word1 = (Button) findViewById(R.id.first_letter);
         word2 = (Button) findViewById(R.id.second_letter);
         word3 = (Button) findViewById(R.id.third_letter);
@@ -70,8 +59,6 @@ public class GameActivity extends AppCompatActivity {
         w3_text = w3.getText().toString();
         w4_text = w4.getText().toString();
         w5_text = w5.getText().toString();
-        setUpListener();
-        clearListener();
     }
 
     private void setUpListener() {
@@ -172,23 +159,24 @@ public class GameActivity extends AppCompatActivity {
         if (word1.getText() == "") {
             word1.setText(text);
             l.setText("");
-        } else if (word1.getText() != "" && word2.getText() == "") {
+        } else if (word2.getText() == "") {
             word2.setText(text);
             l.setText("");
-        } else if (word1.getText() != "" && word2.getText() != "" && word3.getText() == "") {
+        } else if (word3.getText() == "") {
             word3.setText(text);
             l.setText("");
-        } else if (word1.getText() != "" && word2.getText() != "" && word3.getText() != "" && word4.getText() == "") {
+        } else if (word4.getText() == "") {
             word4.setText(text);
             l.setText("");
-            word1_text = word1.getText().toString();
-            word2_text = word2.getText().toString();
-            word3_text = word3.getText().toString();
             word4_text = word4.getText().toString();
+            word3_text = word3.getText().toString();
+            word2_text = word2.getText().toString();
+            word1_text = word1.getText().toString();
             String finalWord = word1_text + word2_text + word3_text + word4_text;
             if (finalWord.equals("вода")) {
                 Toast.makeText(this, "ВЕРНО", Toast.LENGTH_SHORT).show();
             } else {
+                startVibratingAnimation();
                 Toast.makeText(this, "неправильно", Toast.LENGTH_SHORT).show();
             }
         }
@@ -202,6 +190,7 @@ public class GameActivity extends AppCompatActivity {
                     word4_text = word4.getText().toString();
                     switchCase(word4_text);
                     word4.setText("");
+                    clearAnim();
                 } else if (word3.getText() != "") {
                     word3_text = word3.getText().toString();
                     switchCase(word3_text);
@@ -219,6 +208,38 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void startVibratingAnimation() {
+        // Создание анимации
+        Animation animation = new TranslateAnimation(0, 10, 0, 0);
+        animation.setDuration(50);
+        animation.setRepeatMode(Animation.REVERSE);
+        animation.setRepeatCount(5);
+        // Установка анимации на текстовое поле
+        word1.setTextColor(Color.RED);
+        word2.setTextColor(Color.RED);
+        word3.setTextColor(Color.RED);
+        word4.setTextColor(Color.RED);
+        word1.startAnimation(animation);
+        word2.startAnimation(animation);
+        word3.startAnimation(animation);
+        word4.startAnimation(animation);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearAnim();
+    }
+
+    private void clearAnim() {
+        vibrator.cancel();
+        word1.clearAnimation();
+        word1.setTextColor(Color.WHITE);
+        word2.setTextColor(Color.WHITE);
+        word3.setTextColor(Color.WHITE);
+        word4.setTextColor(Color.WHITE);
     }
 
     private void switchCase(String value) {
