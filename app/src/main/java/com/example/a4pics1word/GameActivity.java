@@ -21,7 +21,6 @@ public class GameActivity extends AppCompatActivity {
     private Button w1, w2, w3, w4, w5, clear;
     private String l1_text, l2_text, l3_text, l4_text, l5_text;
     private String w1_text, w2_text, w3_text, w4_text, w5_text;
-    private Vibrator vibrator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,22 +32,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        word1 = (Button) findViewById(R.id.first_letter);
-        word2 = (Button) findViewById(R.id.second_letter);
-        word3 = (Button) findViewById(R.id.third_letter);
-        word4 = (Button) findViewById(R.id.fourth_letter);
-        l1 = (Button) findViewById(R.id.l_1);
-        l2 = (Button) findViewById(R.id.l_2);
-        l3 = (Button) findViewById(R.id.l_3);
-        l4 = (Button) findViewById(R.id.l_4);
-        l5 = (Button) findViewById(R.id.l_5);
-        w1 = (Button) findViewById(R.id.w_1);
-        w2 = (Button) findViewById(R.id.w_2);
-        w3 = (Button) findViewById(R.id.w_3);
-        w4 = (Button) findViewById(R.id.w_4);
-        w5 = (Button) findViewById(R.id.w_5);
-        clear = (Button) findViewById(R.id.btn_clear);
+        word1 = findViewById(R.id.first_letter);
+        word2 = findViewById(R.id.second_letter);
+        word3 = findViewById(R.id.third_letter);
+        word4 = findViewById(R.id.fourth_letter);
+        l1 = findViewById(R.id.l_1);
+        l2 = findViewById(R.id.l_2);
+        l3 = findViewById(R.id.l_3);
+        l4 = findViewById(R.id.l_4);
+        l5 = findViewById(R.id.l_5);
+        w1 = findViewById(R.id.w_1);
+        w2 = findViewById(R.id.w_2);
+        w3 = findViewById(R.id.w_3);
+        w4 = findViewById(R.id.w_4);
+        w5 = findViewById(R.id.w_5);
+        clear = findViewById(R.id.btn_clear);
         l1_text = l1.getText().toString();
         l2_text = l2.getText().toString();
         l3_text = l3.getText().toString();
@@ -234,7 +232,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void clearAnim() {
-        vibrator.cancel();
         word1.clearAnimation();
         word1.setTextColor(Color.WHITE);
         word2.setTextColor(Color.WHITE);
